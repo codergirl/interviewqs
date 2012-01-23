@@ -3,6 +3,10 @@
 
 int main(int argc, char* argv[])
 {
+    printf("This programs takes one argument; a positive integer\n" 
+            "where the result is every pair of odd and even\n"
+            "bits swapped. i.e. 8=1000 is swapped to 4=0100.\n");
+
     if (argc != 2) 
     {
         printf("Please provide exactly one argument.\n");
