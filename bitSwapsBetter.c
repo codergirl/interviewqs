@@ -12,10 +12,10 @@ int main(int argc, char* argv[])
     unsigned int result = 0;
     while (num)
     {
-        int subbednum = num & (num-1);
-        int xored = subbednum ^ num;
-        int xoredcopy = xored;
-        int onloc = 0;
+        unsigned int subbednum = num & (num-1);
+        unsigned int xored = subbednum ^ num;
+        unsigned int xoredcopy = xored;
+        unsigned int onloc = 0;
         while (xoredcopy)
         {
             onloc++;
