@@ -29,5 +29,4 @@ int main(int argc, char* argv[])
     }
 
     printf("Result: %s\n", str);
-
 }
