@@ -48,11 +48,25 @@ public:
         }
     }
 
-    void appendNode(node* nodetoappend)
+    void appendNode(node* curr, int data)
+    {
+        node* n = new node(data);
+        n->prev = curr;
+        curr->next = n;
+    }
+
+    void appendNodeLevel(node* nodetoappend)
     {
         nodetoappend->prev = tail;
         tail->next = nodetoappend;
-        tail = tail->next;
+
+        node* curr = nodetoappend;
+        while (curr->next)
+        {
+            curr=curr->next;
+        }
+
+        tail = curr;
     }
 
     void appendChild(node* n, int data)
@@ -78,6 +92,8 @@ public:
         appendNode(12);
         
         appendChild(head->next, 6);
+        appendNode(head->next->child, 100014);
+        appendNode(head->next->child->next, 1000252);
         appendChild(head->next->child, 12);
         appendChild(head->next->child->child, 16);
         appendChild(head->next->next, 102);
@@ -93,7 +109,7 @@ public:
         {
             if (curr->child)
             {
-                appendNode(curr->child);
+                appendNodeLevel(curr->child);
             }
             curr = curr->next;
         }
