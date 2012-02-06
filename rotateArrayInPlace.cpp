@@ -20,12 +20,30 @@ int main(int argc, char* argv[])
 
     int k;
     char last = str[0];
-    for (k=0; k<=n; k++)
+    int nextIndex;
+    int lastIndex = 0;
+    
+    int loop_end = n;
+    if (n % 2 == 0)
+    {
+        loop_end = n/2;
+    }
+    int iterations = 0;
+repeat: 
+    for (k=0; k<=loop_end; k++)
     {
         char curr = last;
-        int nextIndex = (k+(n-i))%n;  // rotate right by n-i
+        int nextIndex = (lastIndex+(n-i))%n;  // rotate right by n-i
         last = str[nextIndex];
         str[nextIndex] = curr;
+        lastIndex = nextIndex;
+    }
+    iterations++;
+    if (n % 2 == 0 && iterations == 1)
+    {
+        lastIndex = 1;
+        last = str[lastIndex];
+        goto repeat;
     }
 
     printf("Result: %s\n", str);
