@@ -20,6 +20,8 @@ int largest_subsequence_sum(int arr[], int len)
 
 int main(int argc, char* argv[])
 {
+    printf("Pass in a list of space delimited integers and this "
+            "program will print the largest subsequence's sum.\n");
     int len = argc-1;
     int* arr = (int*)malloc(sizeof(int)*len);
     int i;
