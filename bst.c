@@ -3,6 +3,11 @@
 
 #define STACK_MAX 100
 
+int max(int a, int b)
+{
+    return a > b ? a : b;
+}
+
 typedef struct nodeT {
   struct nodeT* left;
   struct nodeT* right;
@@ -26,7 +31,6 @@ void stack_init(stack *s)
 
 stack_elem stack_pop(stack *s)
 {
-  printf("pop\n");
   if (s->size < 1)
   {
     printf("can't pop empty stack\n");
@@ -43,7 +47,6 @@ void stack_push(stack *s, stack_elem e)
        printf("Too many elements, max stack size is %d.\n", STACK_MAX);
        exit(-1);
    }
-   printf("push\n");
    (s->data)[s->size] = e;
    s->size = s->size + 1;
 }
@@ -135,6 +138,16 @@ void inorder(node* root)
    }
 }
 
+int longest_path_length(node* n)
+{
+    if (!n)
+        return 0;
+
+    return max(longest_path_length(n->left)+1,
+               longest_path_length(n->right)+1);
+    
+}
+
 void test_bst_search(int argc, char* argv[])
 {
   node n9 = {NULL,NULL,'8'};
@@ -158,9 +171,18 @@ int main(int argc, char* argv[])
   node n5 = {&n2,&n7,'4'};
   node n13 = {NULL,NULL,'9'};
   node n10 = {&n5,&n13,'9'};
+  node n11 = {NULL, &n10, '1'};
+  
+  node c3_1 = {NULL, NULL, 'z'};
+  node c2_2 = {NULL, &c3_1, 'y'};
+  node c2_1 = {NULL, &c2_2, 'x'};
+  node c1_1 = {NULL, &c2_1, 'a'};
+  node c1_2 = {NULL, NULL, 'b'};
+  node c0 = {&c1_1, &c1_2, '0'};
 
-
-  inorder(&n10);
+  inorder(&c0);
+  int len = longest_path_length(&c0);
+  printf("longest path: %d\n", len);
 }
 
 

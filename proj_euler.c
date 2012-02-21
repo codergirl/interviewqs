@@ -1,9 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 long long max(long long a, long long b)
 {
     return a > b ? a : b;
+}
+
+void prob4()
+{
+    const int LIMIT = 20;
+    printf("Problem 4:\nFind the largest palindrome made from the product of two 3-digit "
+            "numbers.\n");
+
+    unsigned long long total = 1*7*8*9*11*12*13*14*15*16*17*18*19*20;
+    long long running_total = total;
+    long long curr_total;
+    long long prev_total;
+    int i;
+    int outer;
+    for(outer=0; ; outer++)
+    {
+        for(i=2;i<=LIMIT; i++)
+        {
+            if (running_total % i == 0)
+            {
+                curr_total = running_total / i;
+                int j;
+                for (j=2; j<=LIMIT; j++)
+                {
+                    if (curr_total % j != 0)
+                        break;
+                }
+                if (j==LIMIT+1)
+                {
+                    running_total = curr_total;
+                }
+            }
+        }
+        if(prev_total == running_total)
+            break;
+        else
+            prev_total = running_total;
+    }
+    printf("result: %lld\n", running_total);
 }
 
 int find_largest_prime_factor(long long num)
@@ -28,12 +68,16 @@ int find_largest_prime_factor(long long num)
 
 void prob3()
 {
+    printf("Problem 3:\nFind the largest prime factor of a composite number.\n");
+
     long long num = 600851475143;
-    printf("largest prime factor is %d\n", find_largest_prime_factor(num));
+    printf("result: %d\n\n", find_largest_prime_factor(num));
 }
 
 void prob2()
 {
+    printf("Problem 2:\nBy considering the terms in the Fibonacci sequence whose values\n"
+            "do not exceed four million, find the sum of the even-valued terms.\n");
     long long i;
     long long total = 2;
     long long prev = 1;
@@ -51,11 +95,14 @@ void prob2()
         prev = prev2;
         prev2 = fib;
     }
-    printf("prob 2: %lld\n", total);
+    printf("result: %lld\ni\n", total);
 }
 
 void prob1()
 {
+    printf("Problem 1:\nAdd all the natural numbers below 1,000 that are multiples of "
+            "3 or 5.\n");
+
     int i = 1;
     int total = 0;
     while (1)
@@ -72,10 +119,13 @@ void prob1()
         }
         i++;
     }
-    printf("problem 1: %d\n", total);
+    printf("result: %d\n\n", total);
 }
 
 int main(void)
 {
+    prob1();
+    prob2();
     prob3();
+    prob4();
 }
